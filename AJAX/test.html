@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+   
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+</head>
+<body>
+    <div id="show"></div>
+    <button data-page="page.html">Go</button>
+
+
+<script>
+    $(function () {
+        $("button").on("click", function(){
+
+        /*  $("#show").load($(this).data("page"), function(one,two,three){
+           if(two === 'success')
+           { console.log("yssssssssssssssssssssssssssssssssss");}
+        }) ;*/
+
+
+        $.get("page.html", function(one,two,three){
+            console.log(one);
+            console.log(two);
+            console.log(three);
+            $("#show").html(three);
+
+        });
+ 
+        });
+       
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Title Page-->
+    <title>Apply for job </title>
+
+    <!-- Font special for pages-->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+
+    <!-- Main CSS-->
+    <link href="css/main.css" rel="stylesheet" media="all">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body dir="rtl" onload="getrequest()">
+    <div class="page-wrapper bg-dark p-t-100 p-b-50">
+        <div class="wrapper wrapper--w900">
+            <div class="card card-6">
+                <div class="card-heading">
+                    <h2 class="title" > <span id="title">الأستمارة</span></h2>
+                </div>
+                <div class="card-body">
+                    
+                    <form >
+                        <div class="form-row">
+                            <div class="name">الاسم الرباعي</div>
+                            <div class="value">
+                                <input class="input--style-6" type="text" name="full_name"   autofocus id="myname" >
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="name">الايميل </div>
+                            <div class="value">
+                                <div class="input-group">
+                                    <input class="input--style-6" type="email" name="email" id="myemail" placeholder="example@email.com" value="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="name">ملاحظة</div>
+                            <div class="value">
+                                <div class="input-group">
+                                    <textarea class="textarea--style-6" name="message" id="message" ></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="name">ملف CV</div>
+                            <div class="value">
+                                <div class="input-group js-input-file">
+                                    <input class="input-file" type="file" name="file_cv" id="file">
+                                    <label class="label--file" for="file">تحميل </label> 
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn--radius-2 btn--blue-2"   id="bbb">ارسال</button>
+                </div>
+                
+  
+            </div>
+        </div>
+    </div>
+
+    <script>
+          function getrequest(){
+        var myrequest = new XMLHttpRequest(); 
+        myrequest.onreadystatechange = function(){
+            if(this.readyState === 4 && this.status === 200){
+               // console.log(this.responseText);
+                var myJs = JSON.parse(this.responseText),
+                    myText ="";
+                    var example=document.getElementById('title');
+                    example.onmouseenter = function()
+                    {
+   
+                        document.getElementById('myname').value= myJs[0].name;
+                        document.getElementById('myemail').value= myJs[0].email;
+                        document.getElementById('message').value= myJs[0].message;
+                        
+                    } 
+                    example.onmouseleave = function()
+                    {
+                    
+                        document.getElementById('myname').value= "";
+                        document.getElementById('myemail').value="";
+                        document.getElementById('message').value= "";
+                    
+                    }   } };
+        myrequest.open('GET','json/info.json',true);
+    
+        myrequest.send(); } 
+
+    
+        $.ajax({url: "json/info.json", 
+        success: function(data,status,xhr){
+       
+            console.log(data);
+            console.log(status);
+            console.log(xhr);
+        },
+        error: function(xhr,status,error){
+       
+       console.log(xhr);
+       console.log(status);
+       console.log(error);
+       
+       }  });
+
+    </script>
+  
+
+
+     <!-- Main script-->
+   <!--<script src="js/main.js"></script>--> 
+
+</body>
+
+</html>
